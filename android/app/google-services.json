@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "979968982336",
+    "firebase_url": "https://webpresspattern.firebaseio.com",
+    "project_id": "webpresspattern",
+    "storage_bucket": "webpresspattern.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979968982336:android:498939c83e0e109053cea5",
+        "android_client_info": {
+          "package_name": "com.example.webpresspattern"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979968982336-2ug6m2bbc2ihqbi09g1koo2g0qnt1k2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyTnPMGKiblo48lCHS6m6HGFTGZlwhxNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979968982336-2ug6m2bbc2ihqbi09g1koo2g0qnt1k2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
