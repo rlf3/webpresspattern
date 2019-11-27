@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:webpresspattern/pages/home_page.dart';
 import 'package:webpresspattern/pages/login_signup_page.dart';
 import 'package:webpresspattern/services/authentication.dart';
+import 'package:custom_splash/custom_splash.dart';
+
+
+
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -19,6 +24,12 @@ enum AuthStatus {
 }
 
 class _RootPageState extends State<RootPage> {
+
+
+
+
+ 
+
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
 
@@ -35,6 +46,9 @@ class _RootPageState extends State<RootPage> {
       });
     });
   }
+
+
+
 
   void _onLoggedIn() {
     widget.auth.getCurrentUser().then((user){
@@ -64,18 +78,28 @@ class _RootPageState extends State<RootPage> {
     );
   }
 
+
+
+  
+
+
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {
       case AuthStatus.NOT_DETERMINED:
         return _buildWaitingScreen();
+          
+          
+      
         break;
+        
       case AuthStatus.NOT_LOGGED_IN:
         return new LoginSignUpPage(
           auth: widget.auth,
           onSignedIn: _onLoggedIn,
         );
         break;
+
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
           return new HomePage(
@@ -85,8 +109,27 @@ class _RootPageState extends State<RootPage> {
           );
         } else return _buildWaitingScreen();
         break;
+        
       default:
         return _buildWaitingScreen();
+        
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+

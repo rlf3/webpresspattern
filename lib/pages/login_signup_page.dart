@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webpresspattern/services/authentication.dart';
 
+
 class LoginSignUpPage extends StatefulWidget {
   LoginSignUpPage({this.auth, this.onSignedIn});
 
@@ -24,6 +25,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   FormMode _formMode = FormMode.LOGIN;
   bool _isIos;
   bool _isLoading;
+
+
+
+
+
 
   // Check if form is valid before perform login or signup
   bool _validateAndSave() {
@@ -262,4 +268,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           ),
         ));
   }
+
+
+
+
+
+
+
 }

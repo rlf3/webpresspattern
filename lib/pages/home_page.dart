@@ -3,6 +3,7 @@ import 'package:webpresspattern/services/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:webpresspattern/models/todo.dart';
 import 'dart:async';
+import 'login_signup_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -77,7 +78,9 @@ class _HomePageState extends State<HomePage> {
             new FlatButton(
               child: new Text("Dismiss"),
               onPressed: () {
-                Navigator.of(context).pop();
+                //Navigator.of(context).pop();
+                
+                Navigator.pushNamed(context, );
               },
             ),
           ],
@@ -99,6 +102,7 @@ class _HomePageState extends State<HomePage> {
               child: new Text("Dismiss"),
               onPressed: () {
                 Navigator.of(context).pop();
+                
               },
             ),
           ],
