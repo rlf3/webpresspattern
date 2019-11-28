@@ -2,8 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-Color colorCurve = Color.fromRGBO(97, 10, 165, 0.8);
-Color colorCurveSecondary = Color.fromRGBO(97, 10, 155, 0.6);
+Color colorCurve = Color.fromRGBO(51, 153, 255, 0.8);
+//Color colorCurve = Color.fromRGBO(97, 10, 165, 0.8);
+//Color colorCurve = Colors.blueAccent;
+Color colorCurveSecondary = Color.fromRGBO(51, 153, 245, 0.6);
 Color backgroundColor =Colors.grey.shade200;
 Color textPrimaryColor =Colors.black87;
 

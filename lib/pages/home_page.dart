@@ -4,8 +4,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:webpresspattern/models/todo.dart';
 import 'dart:async';
 import 'package:webpresspattern/constants.dart';
-import 'package:webpresspattern/main.dart';
-
+import 'package:webpresspattern/widgets/bottom_navigationBar.dart';
+import 'page_search.dart';
+import 'page_coming_soon.dart';
+import 'page_profile.dart';
+import 'page_settings.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
       : super(key: key);
@@ -19,6 +22,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentTab = 0;
+  PageController pageController;
+
+  _changeCurrentTab(int tab) {
+    //Changing tabs from BottomNavigationBar
+    setState(() {
+      currentTab = tab;
+      pageController.jumpToPage(0);
+    });
+  }
+
+
+
+
   List<Todo> _todoList;
 
   final FirebaseDatabase _database = FirebaseDatabase.instance;
@@ -46,6 +63,9 @@ class _HomePageState extends State<HomePage> {
         .equalTo(widget.userId);
     _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(_onEntryAdded);
     _onTodoChangedSubscription = _todoQuery.onChildChanged.listen(_onEntryChanged);
+
+
+    pageController = new PageController();
   }
 
   void _checkEmailVerification() async {
@@ -294,6 +314,26 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Main widget 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +344,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
                 
                 new IconButton(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.notifications),
                   onPressed: (){
 
                   },
@@ -332,14 +372,43 @@ class _HomePageState extends State<HomePage> {
                 
           ],
         ),
-        body: _showTodoList(),
-        floatingActionButton: FloatingActionButton(
+        //body: _showTodoList(),
+        body: bodyView(currentTab),
+/*         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _showDialog(context);
           },
           tooltip: 'Increment',
           child: Icon(Icons.add),
-        )
+        ), */
+        bottomNavigationBar: BottomNavBar(changeCurrentTab: _changeCurrentTab)
     );
   }
+
+
+
+  bodyView(currentTab) {
+    List<Widget> tabView = [];
+    //Current Tabs in Home Screen...
+    switch (currentTab) {
+      case 0:
+        //Dashboard Page
+        tabView = [PageComingSoon()];
+        break;
+      case 1:
+        //Search Page
+        tabView = [SearchPage()];
+        break;
+      case 2:
+        //Profile Page
+        tabView = [ProfilePage()];
+        break;
+      case 3:
+        //Setting Page
+        tabView = [SettingPage()];
+        break;
+    }
+    return PageView(controller: pageController, children: tabView);
+  }
+
 }
