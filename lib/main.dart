@@ -3,6 +3,8 @@ import 'package:webpresspattern/services/authentication.dart';
 import 'package:webpresspattern/pages/root_page.dart';
 import 'package:flutter/rendering.dart';
 import 'package:custom_splash/custom_splash.dart';
+import 'package:webpresspattern/utils/Constants.dart';
+import 'package:webpresspattern/pages/login_signup_page.dart';
 
 
 void main() {
@@ -18,12 +20,29 @@ void main() {
       return 2;
   };
 
+  
+
 
 
   //debugPaintSizeEnabled = true;
   //runApp(new MyApp());
 
   runApp(MaterialApp(
+
+
+  initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      //'/': (context) => MyApp(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      //'/route': (context) => RootPage(auth: new Auth()),
+      //'/route': (context) => RootPage(auth: new Auth()),
+      '/login': (context) => LoginSignUpPage(auth: new Auth()),
+    },
+
+
+
+
     debugShowCheckedModeBanner: false,
     home: CustomSplash(
       
@@ -48,7 +67,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: 'Web press Login',
+        title: Constants.appName,
         debugShowCheckedModeBanner: false,
         
         theme: new ThemeData(

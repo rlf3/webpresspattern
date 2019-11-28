@@ -4,7 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:webpresspattern/models/todo.dart';
 import 'dart:async';
 import 'package:webpresspattern/constants.dart';
-import 'package:webpresspattern/main.dart';
+
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -282,34 +283,17 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//Main widget 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          //leading: Icon(Icons.home),
+          leading: Icon(Icons.tag_faces),
           title: new Text(appName),
           actions: <Widget>[
-                
-                new IconButton(
-                  icon: Icon(Icons.home),
-                  onPressed: (){
-
-                  },
-                ),
-                
+                new FlatButton(
+                child: new Text('Logout',
+                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+                onPressed: _signOut),
 
                 
 
@@ -326,10 +310,6 @@ class _HomePageState extends State<HomePage> {
                     ];
                   },
                 ),
-
-
-
-                
           ],
         ),
         body: _showTodoList(),

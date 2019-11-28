@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webpresspattern/services/authentication.dart';
+import 'package:webpresspattern/constants.dart';
 
 
 class LoginSignUpPage extends StatefulWidget {
@@ -109,7 +110,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     _isIos = Theme.of(context).platform == TargetPlatform.iOS;
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('Flutter login demo'),
+          title: new Text('$appName - Login'),
         ),
         body: Stack(
           children: <Widget>[
