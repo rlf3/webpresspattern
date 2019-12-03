@@ -22,7 +22,7 @@ class _PageComingSoonState extends State<PageComingSoon> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Search",
+          title: Text("Dashboard",
               style:
               TextStyle(fontFamily: "Exo2", color: backgroundColor)),
           backgroundColor: colorCurve,

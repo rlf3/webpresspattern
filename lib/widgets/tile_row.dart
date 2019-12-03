@@ -15,6 +15,7 @@ class TileRow extends StatelessWidget {
   final GestureTapCallback onTap;
   final Key key;
   final bool disabled;
+  final bool enabled;
   final bool isVisible;
 
    TileRow({
@@ -26,6 +27,7 @@ class TileRow extends StatelessWidget {
     this.disableDivider,
     this.onTap,
     this.disabled = false,
+    this.enabled = true,
     this.backgroundColor,
     this.isVisible = true,
     this.disableTopDivider = true

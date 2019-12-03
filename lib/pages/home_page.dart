@@ -25,15 +25,6 @@ class _HomePageState extends State<HomePage> {
   int currentTab = 0;
   PageController pageController;
 
-  _changeCurrentTab(int tab) {
-    //Changing tabs from BottomNavigationBar
-    setState(() {
-      currentTab = tab;
-      pageController.jumpToPage(0);
-    });
-  }
-
-
 
 
   List<Todo> _todoList;
@@ -48,6 +39,16 @@ class _HomePageState extends State<HomePage> {
   Query _todoQuery;
 
   bool _isEmailVerified = false;
+
+
+  _changeCurrentTab(int tab) {
+    //Changing tabs from BottomNavigationBar
+    setState(() {
+      currentTab = tab;
+      pageController.jumpToPage(0);
+    });
+  }
+
 
   @override
   void initState() {
@@ -68,38 +69,9 @@ class _HomePageState extends State<HomePage> {
     pageController = new PageController();
   }
 
+
   void _checkEmailVerification() async {
     _isEmailVerified = await widget.auth.isEmailVerified();
-
-
-
-
-
-/*       showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Verificated?"),
-          content: new Text("Check your status"),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text(_isEmailVerified.toString()),
-              onPressed: () {
-                Navigator.of(context).pop();
-                
-                //Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      }
-      ); */
-
-
-
-
-
     if (!_isEmailVerified) {
       print(_isEmailVerified);
       _showVerifyEmailDialog();

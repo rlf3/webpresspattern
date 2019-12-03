@@ -42,6 +42,47 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     return false;
   }
 
+  
+  // Perform password reset
+  void _validateAndReset() async {
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+    if (_validateAndSave()) {
+      String userId = "";
+      try {
+        if (_formMode == FormMode.LOGIN) {
+          //userId = await widget.auth.signIn(_email, _password);
+          //print('Signed in: $userId');
+          widget.auth.resetPassword(_email);
+          _showPasswordResetEmailSentDialog();
+        } else {
+          //userId = await widget.auth.signUp(_email, _password);
+          widget.auth.resetPassword(_email);
+          _showPasswordResetEmailSentDialog();
+          //print('Signed up user: $userId');
+        }
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (userId.length > 0 && userId != null && _formMode == FormMode.LOGIN) {
+          widget.onSignedIn();
+        }
+
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          if (_isIos) {
+            _errorMessage = e.details;
+          } else
+            _errorMessage = e.message;
+        });
+      }
+    }
+  }  
   // Perform login or signup
   void _validateAndSubmit() async {
     setState(() {
@@ -127,6 +168,29 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   }
 
+  void _showPasswordResetEmailSentDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Verify your email"),
+          content: new Text("Link to Reset password account has been sent to your email"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Dismiss"),
+              onPressed: () {
+                _changeFormToLogin();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   void _showVerifyEmailSentDialog() {
     showDialog(
       context: context,
@@ -149,6 +213,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     );
   }
 
+
+
+
+
+
   Widget _showBody(){
     return new Container(
         padding: EdgeInsets.all(16.0),
@@ -162,7 +231,9 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
               _showPasswordInput(),
               _showPrimaryButton(),
               _showSecondaryButton(),
+              _showPasswordReset(),
               _showErrorMessage(),
+              
             ],
           ),
         ));
@@ -201,7 +272,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   Widget _showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -270,7 +341,25 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         ));
   }
 
+  Widget _showPasswordReset() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.red,
+            child: _formMode == FormMode.LOGIN
+                ? new Text('Password Reset',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white))           
+                 : new Text('Password Reset',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)), 
 
+            onPressed: _validateAndReset,
+          ),
+        ));
+  }
 
 
 
