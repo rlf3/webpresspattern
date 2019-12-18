@@ -5,8 +5,10 @@ import 'package:custom_splash/custom_splash.dart';
 import 'package:webpresspattern/utils/Constants.dart';
 import 'package:webpresspattern/pages/login_signup_page.dart';
 
+import 'package:webpresspattern/pages/route_generator.dart';
 
 void main() {
+
 
   Function duringSplash = () {
     print('Something background process');
@@ -28,17 +30,18 @@ void main() {
 
   runApp(MaterialApp(
 
-
+  
   initialRoute: '/',
-    routes: {
+/*     routes: {
       // When navigating to the "/" route, build the FirstScreen widget.
       //'/': (context) => MyApp(),
       // When navigating to the "/second" route, build the SecondScreen widget.
       //'/route': (context) => RootPage(auth: new Auth()),
       //'/route': (context) => RootPage(auth: new Auth()),
       '/login': (context) => LoginSignUpPage(auth: new Auth()),
-    },
-
+      loginRoute: (context) => LoginSignUpPage(auth: new Auth()),
+    }, */
+  onGenerateRoute: RouteGenerator.generateRoute,
 
 
 
@@ -72,6 +75,10 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new RootPage(auth: new Auth()));
+        
+        //home: new RootPage(auth: new Auth())
+        home: new RootPage(auth: new Auth())
+    );
+
   }
 }

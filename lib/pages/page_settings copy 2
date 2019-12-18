@@ -1,116 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webpresspattern/utils/utils.dart';
-import 'package:webpresspattern/widgets/widgets.dart';
-import 'dart:async';
-import 'package:webpresspattern/pages/home_page.dart';
-
-import 'package:webpresspattern/services/authentication.dart';
-import 'package:webpresspattern/main.dart';
+import 'package:flutter_ui_collections/utils/utils.dart';
+import 'package:flutter_ui_collections/widgets/widgets.dart';
 
 class SettingPage extends StatefulWidget {
-  SettingPage({Key key, this.auth, this.userId, this.onSignedOut, this.onSignedIn})
-      : super(key: key);  
   @override
   _SettingPageState createState() => _SettingPageState();
-  
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
-  final VoidCallback onSignedIn;
-  final String userId;
 }
 
 class _SettingPageState extends State<SettingPage> {
   bool isLocalNotification = false;
   bool isPushNotification = true;
   bool isPrivateAccount = true;
- bool _isEmailVerified = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _checkEmailVerification();
 
-  }
-
-  void _checkEmailVerification() async {
-    _isEmailVerified = await widget.auth.isEmailVerified();
-    if (!_isEmailVerified) {
-      print(_isEmailVerified);
-      _showVerifyEmailDialog();
-      //Navigator.of(context).pop();
-      Navigator.pushNamed(context, '/login');
-      _signOut();
-    }
-  }
-
-  void _showVerifyEmailDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Verify your account"),
-          content: new Text("Please verify account in the link sent to email"),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Resent link"),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _resentVerifyEmail();
-              },
-            ),
-            new FlatButton(
-              child: new Text("Dismiss"),
-              onPressed: () {
-                _signOut();
-                Navigator.of(context).pop();
-                
-                //Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-
-  void _resentVerifyEmail(){
-    widget.auth.sendEmailVerification();
-    _showVerifyEmailSentDialog();
-  }
-
-  void _showVerifyEmailSentDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Verify your account"),
-          content: new Text("Link to verify account has been sent to your email"),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Dismiss"),
-              onPressed: () {
-                _signOut();
-                Navigator.of(context).pop();
-                
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
@@ -180,11 +87,7 @@ class _SettingPageState extends State<SettingPage> {
           child: TileRow(
             label: "Log out",
             disableDivider: false,
-/*             onTap: () {
-                _signOut;
-                //Navigator.of(context).pop();
-            }, */
-            onTap: _signOut,
+            onTap: () {},
           ),
         )
       ],
@@ -203,7 +106,7 @@ class _SettingPageState extends State<SettingPage> {
           child: TileRow(
             label: "User Name",
             disabled: true,
-            rowValue: "usuario",
+            rowValue: "harsh719",
             disableDivider: false,
             onTap: () {},
           ),

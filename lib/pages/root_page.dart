@@ -88,9 +88,6 @@ class _RootPageState extends State<RootPage> {
     switch (authStatus) {
       case AuthStatus.NOT_DETERMINED:
         return _buildWaitingScreen();
-          
-          
-      
         break;
         
       case AuthStatus.NOT_LOGGED_IN:

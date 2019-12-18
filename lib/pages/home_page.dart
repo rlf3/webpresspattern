@@ -21,11 +21,32 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => new _HomePageState();
 }
 
+
+
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
 class _HomePageState extends State<HomePage> {
+  AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
+
+
+
+  void _onSignedOut() {
+    setState(() {
+      authStatus = AuthStatus.NOT_LOGGED_IN;
+      _userId = "";
+    });
+  }
+
+
+
+
   int currentTab = 0;
   PageController pageController;
 
-
+  String _userId = "";
 
   List<Todo> _todoList;
 
@@ -140,6 +161,62 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////Show User /////////////
+///
+
+  _showName() {
+    widget.auth.getCurrentUser().then((user){
+      setState(() {
+        _userId = user.uid.toString();
+      });
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Current User"),
+          content: new Text(_userId),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Ok"),
+              onPressed: () {
+                //_signOut();
+                Navigator.of(context).pop();
+                
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+/////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
   @override
   void dispose() {
     _onTodoAddedSubscription.cancel();
@@ -171,6 +248,8 @@ class _HomePageState extends State<HomePage> {
       print(e);
     }
   }
+
+
 
   _addNewTodo(String todoItem) {
     if (todoItem.length > 0) {
@@ -231,6 +310,10 @@ class _HomePageState extends State<HomePage> {
       }
     );
   }
+
+
+
+
 
   Widget _showTodoList() {
     if (_todoList.length > 0) {
@@ -328,12 +411,18 @@ class _HomePageState extends State<HomePage> {
                 new PopupMenuButton(
                   itemBuilder: (BuildContext context){
                     return [
+
                         PopupMenuItem(
                           child: new  FlatButton(
                             child: new Text('Logout',
                             style: new TextStyle(fontSize: 17.0, color: Colors.blue)),
                             onPressed: _signOut),
-                        ),
+
+                           
+
+                        ),    
+
+                                          
 
                     ];
                   },
@@ -365,7 +454,11 @@ class _HomePageState extends State<HomePage> {
     switch (currentTab) {
       case 0:
         //Dashboard Page
-        tabView = [PageComingSoon()];
+        tabView = [PageComingSoon(
+                      userId: _userId,
+                      auth: widget.auth,
+                      onSignedOut: _onSignedOut,
+        )];
         break;
       case 1:
         //Search Page
@@ -377,10 +470,15 @@ class _HomePageState extends State<HomePage> {
         break;
       case 3:
         //Setting Page
-        tabView = [SettingPage()];
+        tabView = [ new SettingPage(
+                      userId: _userId,
+                      auth: widget.auth,
+                      onSignedOut: _onSignedOut,
+        )];
         break;
     }
     return PageView(controller: pageController, children: tabView);
   }
 
 }
+
