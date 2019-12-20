@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:webpresspattern/pages/login_signup_page.dart';
+import 'package:webpresspattern/pages/root_page.dart';
 import 'package:webpresspattern/services/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:webpresspattern/models/todo.dart';
@@ -86,10 +88,11 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Settings",
+        //title: Text("Settings $_userId",
+        title: Text("$_userId",
             style:
                 TextStyle(fontFamily: "Exo2", color: textSecondaryLightColor)),
-        backgroundColor: Colors.white,
+            backgroundColor: Colors.white,
       ),
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle(
@@ -150,15 +153,15 @@ class _SettingPageState extends State<SettingPage> {
             disableDivider: false,
             onTap: () {
               _signOut();
-              Navigator.pushNamed(context, '/login');
+              //Navigator.pushNamed(context, '/login');
               //Navigator.of(context).pushNamed('/login');
 
               //Navigator.push(context, RouteGenerator.generateRoute());
 
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => RootPage(auth: new Auth(),),));
+              
 
-
-
-              _signOut();
+              //_signOut();
             },
           ),
         )
