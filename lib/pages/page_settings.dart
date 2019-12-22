@@ -1,30 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:webpresspattern/pages/login_signup_page.dart';
+
 import 'package:webpresspattern/pages/root_page.dart';
 import 'package:webpresspattern/services/authentication.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:webpresspattern/models/todo.dart';
-import 'dart:async';
-import 'package:webpresspattern/constants.dart';
-import 'package:webpresspattern/widgets/bottom_navigationBar.dart';
-import 'page_search.dart';
-import 'page_coming_soon.dart';
-import 'page_profile.dart';
-import 'page_settings.dart';
-
-
-
 
 
 import 'package:flutter/services.dart';
 import 'package:webpresspattern/utils/utils.dart';
 import 'package:webpresspattern/widgets/widgets.dart';
 
-import 'package:webpresspattern/pages/home_page.dart';
 
-
-import 'package:webpresspattern/main.dart';
-import 'route_generator.dart';
 
 
 class SettingPage extends StatefulWidget {
