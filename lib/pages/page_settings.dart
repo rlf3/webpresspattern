@@ -73,7 +73,8 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         centerTitle: true,
         //title: Text("Settings $_userId",
-        title: Text("$_userId",
+        //title: Text("$_userId",
+        title: Text("Settings",
             style:
                 TextStyle(fontFamily: "Exo2", color: textSecondaryLightColor)),
             backgroundColor: Colors.white,
