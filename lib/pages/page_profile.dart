@@ -4,20 +4,53 @@ import 'package:webpresspattern/utils/utils.dart';
 import 'package:webpresspattern/pages/photo_list.dart';
 import 'package:webpresspattern/widgets/utils_widget.dart';
 import 'package:webpresspattern/widgets/widgets.dart';
+import 'root_page.dart';
+import 'package:webpresspattern/services/authentication.dart';
 
 class ProfilePage extends StatefulWidget {
+     ProfilePage({Key key, this.auth, this.userId
+    , this.onSignedOut
+    })
+      : super(key: key);
+
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  final String userId;
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
 class _ProfilePageState extends State<ProfilePage> {
   Screen size;
+  String _userId = "";
+  String _userEmail = "";
+
+  AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
 
   @override
   Widget build(BuildContext context) {
     size = Screen(MediaQuery.of(context).size);
 
     return Scaffold(
+
+
+      appBar: AppBar(
+               leading: new IconButton(
+               icon: new Icon(Icons.arrow_back, color: Colors.white),
+               onPressed: () => //Navigator.of(context).pop(),
+               
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => RootPage(auth: new Auth()),)),
+
+              ), 
+              title: Text("back"),
+              //centerTitle: true,
+            ),
+
       backgroundColor: backgroundColor,
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle(
@@ -39,6 +72,10 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget upperPart() {
+
+
+
+
     return Stack(children: <Widget>[
       ClipPath(
         clipper: UpperClipper(),

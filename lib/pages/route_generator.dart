@@ -4,6 +4,7 @@ import 'package:webpresspattern/main.dart';
 
 import 'login_signup_page.dart';
 import 'package:webpresspattern/services/authentication.dart';
+import 'page_profile.dart';
 
 
 class RouteGenerator {
@@ -14,6 +15,7 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => MyApp());
+      break;
       case '/login':
         // Validation of correct data type
         if (args is String) {
@@ -25,6 +27,12 @@ class RouteGenerator {
         // You can also throw an exception while in development.
         return _errorRoute();
       break;
+
+
+      case '/profile':
+        return MaterialPageRoute(builder: (_) => ProfilePage());
+      break;
+
 
 
       default:

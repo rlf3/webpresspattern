@@ -3,8 +3,6 @@ import 'package:webpresspattern/services/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:webpresspattern/models/todo.dart';
 import 'dart:async';
-import 'package:webpresspattern/constants.dart';
-import 'package:webpresspattern/widgets/bottom_navigationBar.dart';
 import 'page_search.dart';
 import 'page_coming_soon.dart';
 import 'page_profile.dart';
@@ -59,8 +57,7 @@ class _DashBoardState extends State<DashBoard> {
 
   Query _todoQuery;
 
-  bool _isEmailVerified = false;
-
+ 
 
 
 

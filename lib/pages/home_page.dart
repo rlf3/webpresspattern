@@ -10,6 +10,9 @@ import 'page_search.dart';
 import 'page_coming_soon.dart';
 import 'page_profile.dart';
 import 'page_settings.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+//import 'package:webpresspattern/services/flutter_ringtone_player.dart';
+
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
       : super(key: key);
@@ -415,7 +418,14 @@ class _HomePageState extends State<HomePage> {
                 new IconButton(
                   icon: Icon(Icons.notifications),
                   onPressed: (){
-                      _showName();
+                      //_showName();
+                      FlutterRingtonePlayer.play(
+                      android: AndroidSounds.notification,
+                      ios: IosSounds.glass,
+                      looping: true, // Android only - API >= 28
+                      volume: 0.1, // Android only - API >= 28
+                      asAlarm: false, // Android only - all APIs
+                      );
                   },
                 ),
                 
@@ -480,7 +490,11 @@ class _HomePageState extends State<HomePage> {
         break;
       case 2:
         //Profile Page
-        tabView = [ProfilePage()];
+        tabView = [ProfilePage(
+                      userId: _userId,
+                      auth: widget.auth,
+                      onSignedOut: _onSignedOut,          
+        )];
         break;
       case 3:
         //Setting Page
